@@ -1,6 +1,6 @@
 # COMP 440 HW3 write-up
 
-Name:
+Name: Owen Blanchard
 
 Type each answer after the `>` under its question. An answer can run over several lines, but a blank line
 ends it: to start a new paragraph, put a line with just `>` between the two. In a table, fill every cell
@@ -28,31 +28,31 @@ There is nothing to write for this step except your name, after `Name:` at the t
 
 What verdict did the model give (*supported*, *refuted* or *doesn't say*), and what reason did it give? Quote the lines of the output that show them.
 
->
+> The model's verdict was 'refuted', and it's explanation named the author, Sun Ra, and cited it's birthday differently.
 
 ## 0c. Give it one search
 
 Which Wikipedia page did it read? Quote the line of the output that shows it.
 
->
+> It ran a search tool for Persian Surgery Dervishes, looking for information on it's composer.
 
 Did that page settle the claim correctly? If not, why do you think the search led there?
 
->
+> While it got the name of the composer correctly with a search, the Persian Surgery Dervishes page did not have his birthday. The search led there because it couldn't directly find Persian Surgery Dervishes' composer based on just that prompt construction, I think.
 
 ## 0d. Run the agent and read its trace
 
 In one or two sentences, how did the agent get from the claim to its verdict? Point to the trace entries by their numbers.
 
->
+> The agent ran 1. search for Persian Surgery Dervishes composer, and like before it found the answer was Terry Riley, but this time it was able to 2. read Terry Riley's own wikipedia page and find that the answer is supported as a result, so it used it's answer tool to report that it was supported.
 
 Which lookup would you have done differently, and how? If none, which one surprised you?
 
->
+> I think it's lookup path was correct, and was functionally the same one as I or any human would use looking for this answer. It did surprise me with it's tool use efficiency, finding the composer's name off a search result and going directly to a read tool.
 
 Describe Wikidata briefly. Why may it be important to this task?
 
->
+> Wikidata is designed to be machine readable and to reduce hallucinations, so that's probably helpful. More specifically, I would imagine Wikidata is why the model is able to avoid redundant searches when it knows Terry Riley is the answer, because it can find the unambiguous wikidata designations for the composer.
 
 # Part 1: How the agent works
 

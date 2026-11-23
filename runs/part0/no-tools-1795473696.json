@@ -1,0 +1,15 @@
+{
+ "claim": "The composer of \"Persian Surgery Dervishes\" was born on June 24, 1935.",
+ "verdict": "refuted",
+ "evidence": [],
+ "explanation": "Persian Surgery Dervishes is a Sun Ra album, and English Wikipedia gives Sun Ra's birth date as May 22, 1914, not June 24, 1935.",
+ "trace": [],
+ "steps": 0,
+ "tokens": {
+  "input": 121,
+  "output": 600
+ },
+ "cost_usd": 0.000312,
+ "seconds": 2.931001901626587,
+ "method": "no-tools"
+}

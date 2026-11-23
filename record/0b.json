@@ -1,0 +1,72 @@
+{
+  "step": "0b",
+  "title": "Ask the model to assess a claim without tools",
+  "session_id": null,
+  "conversations": [
+    "a30595c8-d35a-4091-9944-099f1c47e0a5"
+  ],
+  "complete": true,
+  "checkpoints": [
+    {
+      "text": "The no-tools baseline's answer is saved in runs/part0/",
+      "reached": true
+    },
+    {
+      "text": "Your answer is in WRITEUP.md",
+      "reached": true
+    }
+  ],
+  "answers": [
+    {
+      "question": "What verdict did the model give (*supported*, *refuted* or *doesn't say*), and what reason did it give? Quote the lines of the output that show them.",
+      "answer": "The model's verdict was 'refuted', and it's explanation named the author, Sun Ra, and cited it's birthday differently.",
+      "written_by": "the student"
+    }
+  ],
+  "record": [
+    {
+      "kind": "asked",
+      "text": "Run the no-tools baseline for the claim",
+      "time": "2026-11-23T16:41:33-06:00"
+    },
+    {
+      "kind": "ran",
+      "text": "Ran check.py --method no-tools",
+      "status": "ok",
+      "file": "runs/part0/no-tools-1795473696.json",
+      "time": "2026-11-23T16:41:35-06:00"
+    },
+    {
+      "kind": "said",
+      "verdict": "refuted",
+      "reason": "Persian Surgery Dervishes is a Sun Ra album, and English Wikipedia gives Sun Ra's birth date as May 22, 1914, not June 24, 1935.",
+      "lookups": 0,
+      "what": "Ran check.py --method no-tools",
+      "file": "runs/part0/no-tools-1795473696.json",
+      "expected": null,
+      "reached": [
+        "The no-tools baseline's answer is saved in runs/part0/",
+        "Your answer is in WRITEUP.md"
+      ],
+      "time": "2026-11-23T16:41:39-06:00"
+    }
+  ],
+  "told_the_page": [
+    {
+      "time": "2026-11-23T16:39:55-06:00",
+      "kind": "status",
+      "text": "Waiting for you to ask for the no-tools run"
+    },
+    {
+      "time": "2026-11-23T16:41:35-06:00",
+      "kind": "status",
+      "text": "Running the no-tools baseline on the claim"
+    },
+    {
+      "time": "2026-11-23T16:41:42-06:00",
+      "kind": "status",
+      "text": "Waiting for your answer in WRITEUP.md"
+    }
+  ],
+  "turns": 2
+}
