@@ -52,7 +52,7 @@ Which lookup would you have done differently, and how? If none, which one surpri
 
 Describe Wikidata briefly. Why may it be important to this task?
 
-> Wikidata is designed to be machine readable and to reduce hallucinations, so that's probably helpful. More specifically, I would imagine Wikidata is why the model is able to avoid redundant searches when it knows Terry Riley is the answer, because it can find the unambiguous wikidata designations for the composer.
+> Wikidata is designed to be machine readable and to reduce hallucinations, so that's probably helpful. More specifically, I would imagine Wikidata is why the model is able to avoid redundant searches when it knows Terry Riley is the answer, because it can find the unambiguous wikidata designations for the composer, or even user the structured formatting to read data directly.
 
 # Part 1: How the agent works
 
