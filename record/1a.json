@@ -1,0 +1,49 @@
+{
+  "step": "1a",
+  "title": "Design the loop",
+  "session_id": null,
+  "conversations": [
+    "a30595c8-d35a-4091-9944-099f1c47e0a5"
+  ],
+  "complete": false,
+  "checkpoints": [
+    {
+      "text": "Your outline is in WRITEUP.md",
+      "reached": false
+    },
+    {
+      "text": "Your loop in my_loop.py passes every rule of the check",
+      "reached": false
+    },
+    {
+      "text": "Your answers are in WRITEUP.md",
+      "reached": false
+    }
+  ],
+  "answers": [
+    {
+      "question": "Write your outline of the loop in the code block: what it remembers, what it repeats, and every way it stops.",
+      "answer": "",
+      "written_by": null
+    },
+    {
+      "question": "List each thing your loop remembers from one turn to the next, and say what would go wrong without it.",
+      "answer": "",
+      "written_by": null
+    },
+    {
+      "question": "Now open `reference_loop.py` and compare it with your loop. Describe one difference in implementation and the resulting effects on agent behavior.",
+      "answer": "",
+      "written_by": null
+    }
+  ],
+  "record": [],
+  "told_the_page": [
+    {
+      "time": "2026-11-23T17:04:26-06:00",
+      "kind": "status",
+      "text": "Waiting for your outline in WRITEUP.md"
+    }
+  ],
+  "turns": 1
+}
