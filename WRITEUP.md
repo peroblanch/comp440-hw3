@@ -157,19 +157,36 @@ How many lookups will the agent make per claim, on average? Why?
 Ask Claude to paste the report of your full run, from `runs/part2/report.txt`, into the empty block below.
 
 ```
+Share of claims where the verdict matched the label:
+
+                          no-tools  one-search       agent
+HoVer, 2 articles         18/34       16/34       21/34   
+HoVer, 3 articles         22/33       17/33       24/33   
+HoVer, 4 articles         19/33       17/33       20/33   
+All                       59/100      50/100      65/100  
+
+HoVer, supported          14/50        1/50       24/50   
+HoVer, not supported      45/50       49/50       41/50   
+
+Average per claim:
+
+                         lookups   seconds
+no-tools                     0.0       3.4
+one-search                   2.0       4.1
+agent                        5.1       7.8
 ```
 
 How do the results compare with your predictions? Where were you furthest off? Use the numbers from your run, by number of articles.
 
->
+> I was the furthest off on the one search baseline. I expected it to be a slight improvement on no tools, but instead it was markedly worse. I was also very far off on my predicted numbers for the agents, but I'm more surprised that it was more accurate on 2 articles than on 4 articles, because it was very bad at 2 articles in the initial test run. I suppose one of the 2 articles it got wrong was a labelling error, however.
 
 Does the gap between the agent and the one-search baseline grow with the number of articles? What in the claims or the traces explains what you see?
 
->
+> Marginally, although not significantly, and not with four articles. One example is "Patrick Mercer was suspended", where again it appears the claim is wrong. Wikipedia conferms that he resigned in lieu of his suspension, which the bots pick up on, although is potentially pedantic. This is one issue the agents seem to run into, which is finding different terminology than they expect and using it to suggest that the prompt is wrong, when it's merely specific.
 
 The no-tools baseline read nothing. How did it do, and what does that tell you about these claims?
 
->
+> It did slightly better than a 50/50 guess, which surprised me, and did consistently better than one-search, which suggests that these claims become quickly misleading without all of the inforation.
 
 ## 2b. Check the evidence yourself
 
@@ -177,19 +194,19 @@ Fill in one row for each of the first five claims in your full run, in the order
 
 | # | Claim (first few words) | Agent's verdict | Matched the dataset's label? | Does the quoted evidence support that verdict? | Why or why not |
 |---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | Gregg Rolie and | refuted | No | Yes? | This is a claim problem, because a+b are not c was read by all 3 agents as neither being c, which lead to refuted, supported by evidence but not the label |
+| 2 | Patrick Mercer was suspended | refuted | No | Yes | Another claim problem, highlights difference between suspended and resigned pending suspension, using evidence |
+| 3 | Queen Medb of Connacht | supported | yes | yes | separates the claim into individual claims and evidences each one using the text exactly |
+| 4 | John McTiernan is the director | refuted | yes | yes | correctly highlights a discrepancy in the stars and explains where the misplaced name came from |
+| 5 | The Formula One World Champion | refuted | no | no? | This one I'm not sure about. the model says refuted because, based on the evidence, the 1963 cup winner and formula one champion were different. However, if the 1963 cup took place before the end of the 1963 season, then the world champion was the 1962 f1 winner, who was the winner of the trophy. another difficulty with parsing the claim for truth because of it's relatively subjective phrasing |
 
 Of the five, how many matched the dataset's label, and for how many of those does the quoted evidence support the verdict?
 
->
+> Only two matched the data sets label, while for either 4/5 or 5/5 depending on readings the quoted evidence seems to support their verdict quite specifically.
 
 Is accuracy alone a good measure of this agent? Why or why not?
 
->
+> No, because accuracy compared to the labels is clearly unreliable based on even a cursory review of some labels.
 
 # Part 3 (extra credit): Why the agent fails, and one change
 

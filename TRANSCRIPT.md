@@ -558,7 +558,7 @@ Once you've filled in `.env`, step 0a's session will run the set-up check.
 <!-- transcript-session: 45343f7b-1904-41a8-adf5-3c83c9afe7ba | 2026-11-23T23:13:48.230Z -->
 ## Session `45343f7b` — 2026-11-23 23:13:48
 
-*57 user turns. Tool output shortened; reasoning omitted.*
+*61 user turns. Tool output shortened; reasoning omitted.*
 
 **User:**
 claude -n "1a Design the loop" --model claude-opus-5-5 --effort medium --setting-sources user --settings .workbench/1a.json --append-system-prompt-file .workbench/1a.md --plugin-dir .workbench/plugin "Start step 1a."
@@ -2726,5 +2726,147 @@ While it runs, type your predictions table and your answer under 1e in `WRITEUP.
 The full run has ended, and its results are saved in `runs/part2`. I haven't opened them, and I won't show them in this step. You read the tables in step 2a, so type your predictions and your answer under 1e in `WRITEUP.md` before you look at any results.
 
 This is a good place to stop for the day. You don't need to reply here.
+
+**User:**
+I can't stop for the day, as this is due at 8am tomorrow, but also we're almost done, as part 3 is extra credit.
+
+**Claude:**
+Understood. The next task is your predictions and your answer under 1e in `WRITEUP.md`, in your editor. Type them and save before you look at any results.
+
+Then step 2a is next. Start it from the homework page: paste its prompt into this chat, or use its command for a new session.
+
+**User:**
+Start step 2a. Read .workbench/2a.md and follow it from now on, in place of your instructions for any other step.
+
+**Claude:**
+- 🔧 `Bash` — awk 'NR>=253' .workbench/2a.md
+
+  ```
+  # This session: one step of the assignment
+  
+  You help with one step, and only this one: 2a, "Compare accuracy", in Part 2 (The agent against the baselines).
+  What this step is, as the page says it under the step's title: In this step you find out how often each of the three versions matched the dataset's label on your 100 evaluation claims. You compare ...
+  This step takes about 25 minutes, as the page says. Say so if the student asks.
+  The student talks to you in a terminal. Beside it, a web page shows every step of the assignment,
+  each with its own Claude Code session, and this step's instructions, which say:
+  
+  <step-instructions>
+  In this step you find out how often each of the three versions matched the dataset's label on your 100
+  evaluation claims. You compare those numbers with your predictions from 1e.
+  
+  ... (138 more lines)
+  ```
+
+- 🔧 `Bash` — ls runs/part2
+
+  ```
+  agent.jsonl
+  no-tools.jsonl
+  one-search.jsonl
+  report.txt
+  run.json
+  ```
+
+I'm now on step 2a, "Compare accuracy".
+
+In this step you find out how often each of the three versions matched the dataset's label on your 100 evaluation claims, and compare those numbers with your predictions from 1e. The full run has finished: `runs/part2/report.txt` exists. The next task is to open "Results" at the top of the homework page, then "runs/part2", and read "Accuracy". When you're ready, ask me to paste the report into the empty block under 2a in `WRITEUP.md`.
+
+**User:**
+Paste the report
+
+**Claude:**
+- 🔧 `Read` — /Users/owenblanchard/CollectiveIntelligence/comp440-hw3/runs/part2/report.txt
+
+  ```
+  1	Share of claims where the verdict matched the label:
+  2	
+  3	                          no-tools  one-search       agent
+  4	HoVer, 2 articles         18/34       16/34       21/34   
+  5	HoVer, 3 articles         22/33       17/33       24/33   
+  6	HoVer, 4 articles         19/33       17/33       20/33   
+  7	All                       59/100      50/100      65/100  
+  8	
+  9	HoVer, supported          14/50        1/50       24/50   
+  10	HoVer, not supported      45/50       49/50       41/50   
+  11	
+  12	Average per claim:
+  ... (6 more lines)
+  ```
+
+- 🔧 `Bash` — grep -n "2a. Compare accuracy" -A 16 WRITEUP.md
+
+  ````
+  155:## 2a. Compare accuracy
+  156-
+  157-Ask Claude to paste the report of your full run, from `runs/part2/report.txt`, into the empty block below.
+  158-
+  159-```
+  160-```
+  161-
+  162-How do the results compare with your predictions? Where were you furthest off? Use the numbers from your run, by number of articles.
+  163-
+  164->
+  165-
+  166-Does the gap between the agent and the one-search baseline grow with the number of articles? What in the claims or the traces explains what you see?
+  ... (5 more lines)
+  ````
+
+- 🔧 `Edit` — /Users/owenblanchard/CollectiveIntelligence/comp440-hw3/WRITEUP.md
+
+  ```
+  The file /Users/owenblanchard/CollectiveIntelligence/comp440-hw3/WRITEUP.md has been updated successfully. (note: the file had been modified on disk since you last read it — the edit applied cleanl...
+  ```
+
+This is the report from `runs/part2/report.txt`:
+
+```
+Share of claims where the verdict matched the label:
+
+                          no-tools  one-search       agent
+HoVer, 2 articles         18/34       16/34       21/34   
+HoVer, 3 articles         22/33       17/33       24/33   
+HoVer, 4 articles         19/33       17/33       20/33   
+All                       59/100      50/100      65/100  
+
+HoVer, supported          14/50        1/50       24/50   
+HoVer, not supported      45/50       49/50       41/50   
+
+Average per claim:
+
+                         lookups   seconds
+no-tools                     0.0       3.4
+one-search                   2.0       4.1
+agent                        5.1       7.8
+```
+
+I pasted it, word for word, into the empty block under 2a in `WRITEUP.md`.
+
+Next, open "Results" at the top of the homework page, then "runs/part2", and read "Accuracy". Then, in your editor, type your answers to the step's three questions under 2a. You don't need to reply here.
+
+**User:**
+Start step 2b. Read .workbench/2b.md and follow it from now on, in place of your instructions for any other step.
+
+**Claude:**
+- 🔧 `Bash` — awk 'NR>=253' .workbench/2b.md
+
+  ```
+  # This session: one step of the assignment
+  
+  You help with one step, and only this one: 2b, "Check the evidence yourself", in Part 2 (The agent against the baselines).
+  What this step is, as the page says it under the step's title: In this step you find out whether the agent's quoted evidence really supports its verdicts.
+  This step takes about 35 minutes, as the page says. Say so if the student asks.
+  The student talks to you in a terminal. Beside it, a web page shows every step of the assignment,
+  each with its own Claude Code session, and this step's instructions, which say:
+  
+  <step-instructions>
+  In this step you find out whether the agent's quoted evidence really supports its verdicts.
+  
+  **Words in this step:** The *evidence* is the sentences the agent quoted from Wikipedia.
+  ... (138 more lines)
+  ```
+
+I'm now on step 2b, "Check the evidence yourself".
+
+In this step you find out whether the agent's quoted evidence really supports its verdicts. The first task is in the results viewer. Open "Results" at the top of the homework page, then "runs/part2". Click "Clear the filters", set "Verdict" in "The agent" box to "supported or refuted", and read rows 1 to 5. If you want a claim's words, verdict or quoted evidence shown here, or a page as the agent read it, ask me.
 
 <!-- end-session: 45343f7b-1904-41a8-adf5-3c83c9afe7ba -->
