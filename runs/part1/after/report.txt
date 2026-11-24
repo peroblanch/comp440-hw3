@@ -1,0 +1,15 @@
+Share of claims where the verdict matched the label:
+
+                             agent
+HoVer, 2 articles          2/4    
+HoVer, 3 articles          4/4    
+HoVer, 4 articles          3/4    
+All                        9/12   
+
+HoVer, supported           4/6    
+HoVer, not supported       5/6    
+
+Average per claim:
+
+                         lookups   seconds
+agent                        6.9       8.8

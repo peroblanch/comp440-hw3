@@ -1,0 +1,5 @@
+{"tool": "search", "input": {"query": "Vic & Anthony's Steakhouse"}}
+{"tool": "read", "input": {"title": "Landry's", "section": null}}
+{"tool": "read", "input": {"title": "Vic & Anthony's Steakhouse", "section": null}}
+{"tool": "search", "input": {"query": "California Club"}}
+{"tool": "read", "input": {"title": "California Club (casino)", "section": null}}

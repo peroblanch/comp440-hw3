@@ -1,0 +1,17 @@
+Share of claims where the verdict matched the label:
+
+                          no-tools  one-search       agent
+HoVer, 2 articles         18/34       16/34       21/34   
+HoVer, 3 articles         22/33       17/33       24/33   
+HoVer, 4 articles         19/33       17/33       20/33   
+All                       59/100      50/100      65/100  
+
+HoVer, supported          14/50        1/50       24/50   
+HoVer, not supported      45/50       49/50       41/50   
+
+Average per claim:
+
+                         lookups   seconds
+no-tools                     0.0       3.4
+one-search                   2.0       4.1
+agent                        5.1       7.8

@@ -5,39 +5,71 @@
   "conversations": [
     "a30595c8-d35a-4091-9944-099f1c47e0a5"
   ],
-  "complete": false,
+  "complete": true,
   "checkpoints": [
     {
       "text": "Your outline is in WRITEUP.md",
-      "reached": false
+      "reached": true
     },
     {
       "text": "Your loop in my_loop.py passes every rule of the check",
-      "reached": false
+      "reached": true
     },
     {
       "text": "Your answers are in WRITEUP.md",
-      "reached": false
+      "reached": true
     }
   ],
   "answers": [
     {
       "question": "Write your outline of the loop in the code block: what it remembers, what it repeats, and every way it stops.",
-      "answer": "",
-      "written_by": null
+      "answer": "Ask the model for tool calls based on the prompt.\nSet steps to 0 and reminded to false.\n\nLoop:\nIf the model has given responses, and there is an answer tool call, stop looping and submit the answer.\n\nIf there are no lookup or tool calls requested, stop looping with no answer.\n\nIf reminded is true:\n    Stop looping with no answer.\n\nFor each requested lookup in the reply:\n    If steps is less than max_steps:\n        Perform the lookup, add its result to the full message response, and increase steps by 1.\n    Otherwise:\n        Add the ready-made limit-reached result for this lookup to the full message response.\n\nIf steps has reached max_steps:\n    Add a line to the full message response instructing the model to provide an answer now.\n    Set reminded to true.\n\nSend the updated message to the model to get a new response, and repeat the loop.",
+      "written_by": "the student"
     },
     {
       "question": "List each thing your loop remembers from one turn to the next, and say what would go wrong without it.",
-      "answer": "",
-      "written_by": null
+      "answer": "Remembers the steps across runs, otherwise it would never enforce max and run forever. Has a boolean flag to remember if it's already given a final warning. Remembers the latest model answers, calls and lookups from the bottom of the loop so it always has something when it starts. Remembers the current conversation state so it can build messages.",
+      "written_by": "the student"
     },
     {
       "question": "Now open `reference_loop.py` and compare it with your loop. Describe one difference in implementation and the resulting effects on agent behavior.",
-      "answer": "",
-      "written_by": null
+      "answer": "The biggest difference is between a while true loop with break conditions and a loop over the steps. After some failed tests, my model gives the opportunity a chance to answer once it's run out of calls, and can't run infinitely if the model doesn't request lookups.",
+      "written_by": "the student"
     }
   ],
-  "record": [],
+  "record": [
+    {
+      "kind": "asked",
+      "text": "Does the loop automatically include content like instructions.md, or do i manually include those",
+      "time": "2026-11-23T17:11:05-06:00"
+    },
+    {
+      "kind": "ran",
+      "text": "Find where instructions.md is used in the code",
+      "status": "ok",
+      "file": null,
+      "time": "2026-11-23T17:11:07-06:00"
+    },
+    {
+      "kind": "ran",
+      "text": "Find where the instructions are sent to the model",
+      "status": "ok",
+      "file": null,
+      "time": "2026-11-23T17:11:10-06:00"
+    },
+    {
+      "kind": "ran",
+      "text": "Ran grep",
+      "status": "ok",
+      "file": null,
+      "reached": [
+        "Your outline is in WRITEUP.md",
+        "Your loop in my_loop.py passes every rule of the check",
+        "Your answers are in WRITEUP.md"
+      ],
+      "time": "2026-11-23T17:11:15-06:00"
+    }
+  ],
   "told_the_page": [
     {
       "time": "2026-11-23T17:04:26-06:00",
@@ -45,5 +77,5 @@
       "text": "Waiting for your outline in WRITEUP.md"
     }
   ],
-  "turns": 1
+  "turns": 2
 }

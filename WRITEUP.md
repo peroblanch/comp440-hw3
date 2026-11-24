@@ -64,16 +64,39 @@ The Background and an example outline are under 1a on the homework page, and in 
 
 Write your outline of the loop in the code block: what it remembers, what it repeats, and every way it stops.
 
-```
+
+``` 
+Ask the model for tool calls based on the prompt.
+Set steps to 0 and reminded to false.
+
+Loop:
+If the model has given responses, and there is an answer tool call, stop looping and submit the answer.
+
+If there are no lookup or tool calls requested, stop looping with no answer.
+
+If reminded is true:
+    Stop looping with no answer.
+
+For each requested lookup in the reply:
+    If steps is less than max_steps:
+        Perform the lookup, add its result to the full message response, and increase steps by 1.
+    Otherwise:
+        Add the ready-made limit-reached result for this lookup to the full message response.
+
+If steps has reached max_steps:
+    Add a line to the full message response instructing the model to provide an answer now.
+    Set reminded to true.
+
+Send the updated message to the model to get a new response, and repeat the loop.
 ```
 
 List each thing your loop remembers from one turn to the next, and say what would go wrong without it.
 
->
+>  Remembers the steps across runs, otherwise it would never enforce max and run forever. Has a boolean flag to remember if it's already given a final warning. Remembers the latest model answers, calls and lookups from the bottom of the loop so it always has something when it starts. Remembers the current conversation state so it can build messages.
 
 Now open `reference_loop.py` and compare it with your loop. Describe one difference in implementation and the resulting effects on agent behavior.
 
->
+> The biggest difference is between a while true loop with break conditions and a loop over the steps. After some failed tests, my model gives the opportunity a chance to answer once it's run out of calls, and can't run infinitely if the model doesn't request lookups.
 
 ## 1b. Be the agent
 
@@ -83,11 +106,15 @@ List your lookups, in order. Ask Claude to paste every column but the last from 
 
 | # | Tool | What you asked for | Why you chose it |
 |---|---|---|---|
-| 1 | | | |
+| 1 | search | Vic & Anthony's Steakhouse | Initial search for the key term to get information. |
+| 2 | read | Landry's | This was a mistake, but I added it because I wanted to confirm 'landry's' was called Landry's inc. |
+| 3 | read | Vic & Anthony's Steakhouse | Needed information about it. Without the landry's search this would have given me the Landry's inc and vegas connection|
+| 4 | search | California Club | Check if california club combined with golden nugget casino |
+| 5 | read | California Club (casino) | didn't say in the search, so check the page|
 
 What is your verdict on the claim, and which sentence or sentences from what you read is it based on?
 
->
+> Supported. Vic & Anthony's Steakhouse is owned and operated by Landry's Inc, and is located inside the Golden Nugget Casino in Las Vegas, which combined with the California Club shortly after it's 1973 acquisition by Steven Wynn.
 
 ## 1c. Watch the agent work
 
@@ -95,19 +122,19 @@ List the three traces you read closely. At least one should be a claim the agent
 
 | # | Claim (first few words) | Articles | Did it match the dataset's label? | Did it get there for a good reason? Why or why not |
 |---|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
+| 1 | The actor who starred as Constable Benton Fraser | Paul Gross, Martha Burns | No | Yes, because both wikipedia pages agree the two are married. |
+| 2 | Scotland holds both this landmark | Catterline, Cowie Castle, Todhead Lighthouse | Yes | Yes, because 'east catterline' isn't discoverable on wikipedia or mentioned elsewhere in the articles |
+| 3 | The film, that Buddy Baker scored | Bruce M. Fischer, Buddy Baker (composer), Something Wicked this way comes, the apple dumpling gang (film) | Yes | Yes, because it confirmed individually and thoroughly that buddy baker scored the 1975 film, and that it was released before the film with Mr Coogar played by Bruce Fischer. |
 
 Which trace did you find most interesting, and what did the agent do well or badly in it?
 
->
+> I find the constable benton fraser trace really interesting, as it didn't search or read Constable Benton Fraser, and instead immediately read Paul Gross. That said, I'm also curious why the label is seemingly incorrect.
 
 ## 1d. Write the agent's instructions
 
 What changed in the agent's traces after you wrote your instructions? Give one claim as an example.
 
->
+> Very little changed in the trace patterns. One claim that's interesting is "the former leader of the school of Soviet and Russian....", where the two models gave different responses based on their findings, refuted and not supported, but the labels matched. Their traces are remarkably similar as well, although my ruled model broke it into clauses slightly differently, and searched in a different order for information. While it ended up with the same result in the same number of searches, it's searches are much less general, which could have worked out for it in different cases.
 
 ## 1e. Start the full run, and predict
 
@@ -115,13 +142,13 @@ Predict the share of claims each version will get right (its verdict matches the
 
 | Version | 2 articles | 3 articles | 4 articles | Why you think so |
 |---|---|---|---|---|
-| No tools | | | | |
-| One search | | | | |
-| Agent | | | | |
+| No tools | 40% | 40% | 40% | This guess might be slightly less than generous, but based on it's memory alone the model should hallucinate and basically end up guessing or second guessing itself on every answer. I can't think of a reason why these would be different across articles, as it can't see them. |
+| One search | 70% | 45% | 42% | Slightly better than a guess on everything, but can't find actual reasoning and can't significantly improve when more articles are involved. Percentages are guesses based on my initial results and could be substantially higher. |
+| Agent | 60% | 95% | 75% | On two articles, as shown in the initial runs, answer becomes more like a guess and less reliable. With more data to a point, becomes more reliable, but struggles to keep track of information for larger claims and tracking four articles. 95% 75% is probably too big of a jump, but the rankings I think should be accurate, and were accurate to the initial findings.|
 
 How many lookups will the agent make per claim, on average? Why?
 
->
+> The agent should average just under double the number of articles, as it searches and reads the articles. Sometimes it'll find the information it needs from just a search, and sometimes it'll need to verify a search using wikidata, but should balance out over time.
 
 # Part 2: The agent against the baselines
 

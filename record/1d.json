@@ -1,0 +1,48 @@
+{
+  "step": "1d",
+  "title": "Write the agent's instructions",
+  "session_id": null,
+  "conversations": [],
+  "complete": true,
+  "checkpoints": [
+    {
+      "text": "Your own instructions are in instructions.md, and say: how to break a claim into pieces; when to use wikidata; when to stop; when to answer \"doesn't say\"",
+      "reached": true
+    },
+    {
+      "text": "The second run on your 12 development claims is saved",
+      "reached": true
+    },
+    {
+      "text": "Your answer is in WRITEUP.md",
+      "reached": true
+    }
+  ],
+  "answers": [
+    {
+      "question": "What changed in the agent's traces after you wrote your instructions? Give one claim as an example.",
+      "answer": "Very little changed in the trace patterns. One claim that's interesting is \"the former leader of the school of Soviet and Russian....\", where the two models gave different responses based on their findings, refuted and not supported, but the labels matched. Their traces are remarkably similar as well, although my ruled model broke it into clauses slightly differently, and searched in a different order for information. While it ended up with the same result in the same number of searches, it's searches are much less general, which could have worked out for it in different cases.",
+      "written_by": "the student"
+    }
+  ],
+  "record": [
+    {
+      "kind": "mark",
+      "reached": [
+        "Your own instructions are in instructions.md, and say: how to break a claim into pieces; when to use wikidata; when to stop; when to answer \"doesn't say\"",
+        "The second run on your 12 development claims is saved",
+        "Your answer is in WRITEUP.md"
+      ],
+      "time": "2026-11-23T22:56:36-06:00"
+    }
+  ],
+  "told_the_page": [
+    {
+      "time": "2026-11-23T22:56:36-06:00",
+      "kind": "checkpoint",
+      "n": 1,
+      "text": "Your own instructions are in instructions.md, and say: how to break a claim into pieces; when to use wikidata; when to stop; when to answer \"doesn't say\""
+    }
+  ],
+  "turns": 0
+}

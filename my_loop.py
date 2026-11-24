@@ -43,4 +43,56 @@ def run_agent(claim, client=None, max_steps=MAX_STEPS, lookup=run_tool):
     # also pay attention to whether the loop has reached its limit: a claim that runs out of
     # lookups cannot be decided.
     # ---- your loop goes below this line (step 1a) ----
-    raise NotImplementedError("The loop is not written yet: see step 1a.")
+
+    # Ask the model for tool calls based on the prompt.
+    reply = talk.ask()
+
+    # Set steps to 0 and reminded to false.
+    # (steps is already 0 above)
+    reminded = False
+
+    # Loop:
+    while True:
+
+        # If the model has given responses, and there is an answer tool call, stop looping and submit the answer.
+        if talk.asked > 0 and reply.answer:
+            return talk.accept(reply.answer, steps)
+
+        # If there are no lookup or tool calls requested, stop looping with no answer.
+        if not reply.calls:
+            return talk.stop(NO_ANSWER, steps)
+
+        # If reminded is true:
+        if reminded:
+
+            # Stop looping with no answer.
+            return talk.stop(RAN_OUT, steps)
+
+        # For each requested lookup in the reply:
+        for call in reply.lookups:
+
+            # If steps is less than max_steps:
+            if steps < max_steps:
+
+                # Perform the lookup, add its result to the full message response, and increase steps by 1.
+                talk.give(call, talk.run(call))
+                steps += 1
+
+            # Otherwise:
+            else:
+
+                # Add the ready-made limit-reached result for this lookup to the full message response.
+                talk.give(call, OUT_OF_STEPS.format(n=max_steps))
+
+        # If steps has reached max_steps:
+        if steps >= max_steps:
+
+            # Add a line to the full message response instructing the model to provide an answer now.
+            talk.results.append({"type": "text", "text": REMINDER})
+
+            # Set reminded to true.
+            reminded = True
+
+        # Send the updated message to the model to get a new response, and repeat the loop.
+        talk.send_results()
+        reply = talk.ask()
